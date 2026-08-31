@@ -41,9 +41,6 @@ active example is the logging decorator applied to a simple summing function.
 
 - How to serve HTML (including an embedded image) from a Flask view
   function using an f-string.
-- How to generate a random number once at module load time so it stays
-  fixed for the lifetime of the running server, rather than regenerating
-  on every request.
 - Python decorators: how `func(*args)` and a `wrapper` function let you
   add behavior (logging, timing, wrapping output in HTML tags) around an
   existing function without changing its code, practiced in `playground.py`
