@@ -5,10 +5,13 @@ between 0 and 9 and shows a home page prompting the player to guess it.
 
 ## Features
 
-- Flask app with a single route (`/`) that returns an HTML page with a
+- Flask app with a home route (`/`) that returns an HTML page with a
   heading asking the player to guess a number between 0 and 9, and a GIF.
 - A random target number (0-9) is generated once when the app starts and
   printed to the console for debugging.
+- A `/<guess>` route: visiting a URL with a number appended (e.g. `/5`)
+  compares it against the target and returns a distinct message and GIF
+  for "too low", "too high", or "correct".
 
 ## How to Run
 
@@ -33,9 +36,10 @@ active example is the logging decorator applied to a simple summing function.
 
 ## Known Issues / Limitations
 
-- There is no way to actually submit a guess yet. The route that would
-  capture a guessed number from the URL and compare it against the target
-  (with distinct too-high / too-low / correct responses) is not implemented.
+- The `/<guess>` route doesn't validate its input: visiting a non-numeric
+  URL (e.g. `/abc`) crashes with a 500 error instead of showing a friendly
+  message, since it converts the URL segment with `int(guess)` rather than
+  using Flask's `<int:guess>` route converter.
 
 ## What I Learned
 
