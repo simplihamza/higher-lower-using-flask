@@ -6,28 +6,26 @@ number = random.randint(0, 9)
 print(number)
 @app.route('/')
 def welcome():
-    return f'<h1>Guess a number between 0 and 9: </h1> <img src="https://media.giphy.com/media/3o7aCSPqXE5C6T8tBC/giphy.gif" alt="Guess a Number">'
+    return (f'<h1>Guess a number between 0 and 9: </h1>'
+            f'<img src="https://media.giphy.com/media/3o7aCSPqXE5C6T8tBC/giphy.gif" '
+            f'alt="Guess a Number">')
 
+@app.route('/<guess>')
+def view(guess):
+    if int(guess) == number:
+        return (f'<h1>You got me!</h1>'
+                f'<img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZDZzZDdzbXcyNDgwZGcwaXgwcmFycXJoaDIwM242d3pxNm5xZnhsaiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/dLhoOYRmsJVOhKbyTK/giphy.gif" '
+                f'alt="Correct Number Guessed">')
+    elif int(guess) < number:
+        return (f'<h1>Too low, try again!</h1>'
+                f'<img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYjg4aTQ2YXlqa21qbm45ZnRkMXJ5Ym5xZzNtdDh4d2ZnajRycWh6aSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/hPPx8yk3Bmqys/giphy.gif" '
+                f'alt="Guessed number is lower, try again">')
+    elif int(guess) > number:
+        return (f'<h1>Too high, try again!</h1>'
+                f'<img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYjg4aTQ2YXlqa21qbm45ZnRkMXJ5Ym5xZzNtdDh4d2ZnajRycWh6aSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/hPPx8yk3Bmqys/giphy.gif" '
+                f'alt="Guessed number is higher, try again">')
+    else:
+        return (f'<h1>Wrong option, try again!</h1>')
 
 if __name__ == '__main__':
     app.run(debug=True)
-
-# TODO-3: Create a new route that captures a number from the URL itself
-#  (e.g. visiting "/3" or "/7"). Look into Flask's route "converters",
-#  specifically how to tell Flask that a piece of the URL should be
-#  captured as an integer and passed into your view function as a
-#  parameter, rather than treated as a fixed literal path.
-
-# TODO-4: Inside that new route's function, compare the captured number
-#  against your randomly generated number from TODO-2. You'll need three
-#  distinct outcomes: guess is too high, too low, or exactly correct,
-#  using the same kind of three-way comparison structure you've used in
-#  earlier exercises. For each outcome, return a different HTML string
-#  with a distinct <h1> message, a distinct text color (inline CSS via
-#  a 'style' attribute), and a different GIF for each outcome.
-
-# TODO-5: Test all three scenarios manually by visiting different URLs
-#  in your browser (e.g. yoursite/2, yoursite/5, yoursite/9), and confirm
-#  each one shows the correct message, color, and GIF, and that guessing
-#  correctly (matching the number printed in your console from TODO-2)
-#  shows the "correct" outcome.
